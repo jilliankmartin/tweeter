@@ -10,6 +10,6 @@ $(document).ready(function() {
   $(".tweet").on('mouseout', function(event) {
     $('#handle').text("");
     $('#handle').removeClass('.tweet:hover');
-});
+  });
 
 });

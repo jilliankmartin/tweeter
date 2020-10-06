@@ -20,6 +20,7 @@ article.tweet > header {
   background-image: none;
   height: auto;
   padding-top: 10px;
+  margin-top: 10px;
 }
 
 article.tweet > p {
@@ -46,32 +47,3 @@ article.tweet header div {
   display: inherit;
   align-items: center;
 }
-
-/* 
-article.tweet header {
-  background-color: #f4f1ec;
-  background-image: none;
-  flex-direction: row;
-  justify-content: space-between;
-  height: auto;
-  width: 90%;
-  display: inherit;
-} */
-
-/* article.tweet footer {
-  flex-direction: row;
-  justify-content: space-between;
-  width: 90%;
-}
-
-
-
-article.tweet p {
-  align-items: flex-start;
-  display: inherit; 
-}
-
-article.tweet footer p {
-  border-top: 5px solid #545149;
-  
-} 

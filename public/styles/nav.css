@@ -19,3 +19,9 @@ button {
   border: none;
   color: white;
 }
+
+#header-sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
