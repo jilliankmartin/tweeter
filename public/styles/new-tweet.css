@@ -1,0 +1,19 @@
+.new-tweet {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.tweet-footer {
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  font-family: 'Bungee', sans-serif;
+}
+
+#tweet-text {
+  background-color: white;
+  border-style: none;
+  width: 100%;
+}
