@@ -1,6 +1,15 @@
-/*
- * Client-side JS logic goes here
- * jQuery is already loaded
- * Reminder: Use (and do all your DOM work in) jQuery's document ready function
- */
+$(document).ready(function() {
+  console.log("Ready for Javascript");
 
+  $(".tweet").on('mouseover', function(event) {
+      const handleName = "@SirIsaac"
+      $('#handle').text(handleName);
+      $('#handle').addClass('.tweet:hover');
+  });
+
+  $(".tweet").on('mouseout', function(event) {
+    $('#handle').text("");
+    $('#handle').removeClass('.tweet:hover');
+});
+
+});
