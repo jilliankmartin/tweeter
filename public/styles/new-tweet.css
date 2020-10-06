@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: center;
   width: 100%;
+
 }
 
 .tweet-footer {
@@ -10,10 +11,19 @@
   display: flex;
   flex-direction: row;
   font-family: 'Bungee', sans-serif;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 #tweet-text {
   background-color: white;
   border-style: none;
   width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-bottom: 5px solid #545149;
+}
+
+#chevron {
+  font-family: 'Source Sans Pro', sans-serif;
 }
