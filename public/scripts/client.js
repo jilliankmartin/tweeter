@@ -53,7 +53,7 @@ $(document).ready(function() {
   }
 
   const renderTweets = function(tweets) {
-    tweets.forEach(tweet => $('#tweets-container').append(createTweetElement(tweet)));
+    tweets.forEach(tweet => $('#tweets-container').prepend(createTweetElement(tweet)));
   }
 
   $(function() {
