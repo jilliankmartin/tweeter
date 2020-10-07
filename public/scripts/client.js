@@ -69,9 +69,9 @@ $(document).ready(function() {
       const errorEmpty = "It doesn't look like you wrote a tweet! Please enter some text."
       const errorOverChar = "Your tweet is over 140 characters. Shorten it to submit."
       if (!rawTweetInput || rawTweetInput === " ") {
-        $('.new-tweet div').addClass('error').text(errorEmpty).slideDown(600)
+        $('.error-no-input').slideDown("slow");
       } else if (rawTweetInput.length > 140) {
-        $('.new-tweet div').text(errorOverChar).addClass('error');
+        $('.error-max-chars').slideDown("slow");
       } else {
         $('.new-tweet div').slideUp();
         $.ajax('/tweets', { 
@@ -85,6 +85,10 @@ $(document).ready(function() {
       }
     });
   });
+
+  //  initializes the hiding of the error message
+   $(".error-no-input").hide();
+   $(".error-max-chars").hide();
 
   const loadTweets = function() {
     $.ajax('/tweets', {

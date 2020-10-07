@@ -51,9 +51,11 @@
         <form action="/tweets" method="POST">
           <label for="tweet-text">What are you humming about?</label>
         </br>
-        <div></div>
+        <div class="error-no-input">Error no input!</div>
+        <div class="error-max-chars">Error max chars!</div>
           <textarea name="text" id="tweet-text"></textarea>
           <footer class="tweet-footer">
+            
             <button type="submit">Tweet</button>
             <output name="counter" class="counter" for="tweet-text">140</output>
           </footer>

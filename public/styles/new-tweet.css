@@ -32,7 +32,7 @@
   color: red;
 }
 
-.error {
+.error-no-input {
   background-color: #fce4e4;
   border: 1px solid #fcc2c3;
   color: #d12317;
@@ -41,11 +41,15 @@
   padding-left: 10px;
   padding-right: 10px;
   margin: 10px;
-  /* opacity:1;
-  height: auto; */
 }
-/* 
-.hide-error-messages {
-  opacity: 0;
-  height: 0;
-} */
+
+.error-max-chars {
+  background-color: #fce4e4;
+  border: 1px solid #fcc2c3;
+  color: #d12317;
+  font-weight: 600;
+  font-size: 20;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 10px;
+}
