@@ -20,8 +20,16 @@ button {
   color: white;
 }
 
+#new-tweet-nav {
+  flex-direction: column;
+  display: inherit;
+  align-items: center;
+  color: red;
+}
+
 #header-sticky {
   position: fixed;
   top: 0;
   width: 100%;
 }
+
