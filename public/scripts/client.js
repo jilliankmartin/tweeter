@@ -59,17 +59,24 @@ $(document).ready(function() {
   $(function() {
     $('.new-tweet').on('submit', function() {
       event.preventDefault();
-      console.log('Form submitted, performing ajax call...');
+      const rawTweetInput = $('#tweet-text').val();
       const tweetContent = $('#tweet-text').serialize();
-      $.ajax('/tweets', { 
-        url: '/tweets',
-        method: 'POST',
-        data: tweetContent,
-      })
-      .then(function() {
-        console.log("Successful post");
-        
-      });
+      if (!rawTweetInput) {
+        alert("You must write something to make a tweet");
+      } else if (rawTweetInput.length > 140) {
+        alert("Your tweet is over 140 characters");
+      } else {
+        $.ajax('/tweets', { 
+          url: '/tweets',
+          method: 'POST',
+          data: tweetContent,
+        })
+        .then(function() {
+          loadTweets();
+          console.log("Successful post");
+          
+        });
+      }
     });
   });
 
