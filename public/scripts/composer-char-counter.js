@@ -1,5 +1,4 @@
 $(document).ready(function() {
-  console.log("Ready for Javascript");
 
   $("#tweet-text").on('keyup', function(event) {
     const remainingChars = 140 - $(this).val().length;
@@ -11,25 +10,3 @@ $(document).ready(function() {
   });
 
 });
-
-
-
-
-
-
-
-
-/*
-const createTweet = function(tweetsDB) {
-  return `<article class="Tweet">
-  ${tweetsDB.name} is a ${something}
-  </article>`
-}
-
-//to load every tweet in the DB
-tweetsDB.forEach(tweet => {
-  $container.append(createTweet(tweetsDB))
-})
-//To load one tweet in the DB
-$container.append(createTweet(tweetsDB))
-*/

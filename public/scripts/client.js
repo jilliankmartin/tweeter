@@ -1,6 +1,5 @@
 
 $(document).ready(function() {
-  console.log("Ready for Javascript"); // delete
 
   const getTimeCreatedAt = function(time) {
     const currentDate = Date.now();
@@ -37,7 +36,7 @@ $(document).ready(function() {
                 <p id="handle">${tweet.user.handle}</p>
               </header>
               <p>
-                ${tweet.content.text}
+                ${escape(tweet.content.text)}
               </p>
               <footer>
                 <div>${getTimeCreatedAt(tweet.created_at)}</div>
@@ -54,6 +53,12 @@ $(document).ready(function() {
 
   const renderTweets = function(tweets) {
     tweets.forEach(tweet => $('#tweets-container').prepend(createTweetElement(tweet)));
+  }
+
+  const escape =  function(str) {
+    let div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
   }
 
   $(function() {
@@ -73,8 +78,6 @@ $(document).ready(function() {
         })
         .then(function() {
           loadTweets();
-          console.log("Successful post");
-          
         });
       }
     });
@@ -86,7 +89,6 @@ $(document).ready(function() {
     })
     .then(function(tweets) {
       renderTweets(tweets)
-      console.log("rendered the tweets")
     });
   };
 
