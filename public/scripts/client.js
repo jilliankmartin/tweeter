@@ -66,11 +66,14 @@ $(document).ready(function() {
       event.preventDefault();
       const rawTweetInput = $('#tweet-text').val();
       const tweetContent = $('#tweet-text').serialize();
-      if (!rawTweetInput) {
-        alert("You must write something to make a tweet");
+      const errorEmpty = "It doesn't look like you wrote a tweet! Please enter some text."
+      const errorOverChar = "Your tweet is over 140 characters. Shorten it to submit."
+      if (!rawTweetInput || rawTweetInput === " ") {
+        $('.new-tweet div').addClass('error').text(errorEmpty).slideDown(600)
       } else if (rawTweetInput.length > 140) {
-        alert("Your tweet is over 140 characters");
+        $('.new-tweet div').text(errorOverChar).addClass('error');
       } else {
+        $('.new-tweet div').slideUp();
         $.ajax('/tweets', { 
           url: '/tweets',
           method: 'POST',
