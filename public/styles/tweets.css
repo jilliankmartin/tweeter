@@ -8,9 +8,17 @@
   padding-right: 10px;
 }
 
+#handle {
+  opacity: 0;
+}
+
 .tweet:hover {
   box-shadow: 5px 5px #c4c3c0;
   font-weight: 600;
+}
+
+.tweet:hover #handle {
+  opacity: 1;
 }
 
 article.tweet > header {
@@ -47,3 +55,4 @@ article.tweet header div {
   display: inherit;
   align-items: center;
 }
+
