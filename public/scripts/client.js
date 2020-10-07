@@ -93,7 +93,7 @@ $(document).ready(function() {
         method: 'POST',
         data: tweetContent,
       })
-      .done(function() {
+      .then(function() {
         console.log("Successful post");
         
       });
