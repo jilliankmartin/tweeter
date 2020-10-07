@@ -83,15 +83,21 @@ $(document).ready(function() {
 
   renderTweets(data);
 
-  // $(".tweet").on('mouseover', function(event) {
-  //   const handleName = `${data.user.handle}`
-  //   $('#handle').text(handleName);
-  //   $('#handle').addClass('.tweet:hover');
-  // });
-
-  // $(".tweet").on('mouseout', function(event) {
-  // $('#handle').text("");
-  // $('#handle').removeClass('.tweet:hover');
-  // });
+  $(function() {
+    $('.new-tweet').on('submit', function() {
+      event.preventDefault();
+      console.log('Form submitted, performing ajax call...');
+      const tweetContent = $('#tweet-text').serialize();
+      $.ajax('/tweets', { 
+        url: '/tweets',
+        method: 'POST',
+        data: tweetContent,
+      })
+      .done(function() {
+        console.log("Successful post");
+        
+      });
+    });
+  });
 
 });
