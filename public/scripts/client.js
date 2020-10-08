@@ -56,8 +56,11 @@ $(document).ready(function() {
 
   //Loops over the submitted tweets, passes them to the function that creates the injectable html and renders what is returned on the page
   const renderTweets = function(tweets) {
-    $('#tweets-container').empty();
-    tweets.forEach(tweet => $('#tweets-container').prepend(createTweetElement(tweet)));
+
+    const $container = $('#tweets-container');
+
+    $container.empty();
+    tweets.forEach(tweet => $container.prepend(createTweetElement(tweet)));
   };
 
   //Takes in raw user input and outputs text that is safe from xss attacks
@@ -69,13 +72,17 @@ $(document).ready(function() {
 
   //handles post submission for new tweet, including errors if the user inputs invalid things
   $(function() {
+
+    const $tweetText = $('#tweet-text');
+    const maxTweet = 140;
+
     $('.new-tweet').on('submit', function() {
       event.preventDefault();
-      const rawTweetInput = $('#tweet-text').val();
-      const tweetContent = $('#tweet-text').serialize();
+      const rawTweetInput = $tweetText.val();
+      const tweetContent = $tweetText.serialize();
       if (!rawTweetInput || rawTweetInput === " ") {
         $('.error-no-input').slideDown("slow");
-      } else if (rawTweetInput.length > 140) {
+      } else if (rawTweetInput.length > maxTweet) {
         $('.error-max-chars').slideDown("slow");
       } else {
         $.ajax('/tweets', {
@@ -84,7 +91,7 @@ $(document).ready(function() {
         })
           .then(function() {
             $('textarea').val("");
-            $('.counter').text("140");
+            $('.counter').text(maxTweet);
             $('.new-tweet div').slideUp();
             loadTweets();
           });
@@ -94,24 +101,30 @@ $(document).ready(function() {
 
   //changes write new tweet button if its hovered on
   $(function() {
-    $('#new-tweet-nav').on('mouseover', function() {
-      $("#header-sticky button").addClass('tweeter-hovered');
+
+    const $newTweet = $('#new-tweet-nav');
+    const $headerSticky = $("#header-sticky button");
+
+    $newTweet.on('mouseover', function() {
+      $headerSticky.addClass('tweeter-hovered');
     });
-    $('#new-tweet-nav').on('mouseleave', function() {
+    $newTweet.on('mouseleave', function() {
       event.target.style.color = "none";
-      $("#header-sticky button").removeClass('tweeter-hovered');
+      $headerSticky.removeClass('tweeter-hovered');
     });
   });
 
   //drops the new tweet input down if a user clicks the button in nav
   $(function() {
+    const $newTweet = $('.new-tweet')
     let tweetOpened = false;
     $('#new-tweet-nav').on('click', function() {
       if (tweetOpened) {
-        $('.new-tweet').slideUp();
+        $newTweet.slideUp();
         tweetOpened = false;
       } else {
-        $('.new-tweet').slideDown("slow");
+        $newTweet.slideDown("slow");
+        $('textarea').focus();
         tweetOpened = true;
       }
     });
