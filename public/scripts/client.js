@@ -1,6 +1,7 @@
 
 $(document).ready(function() {
 
+    //Takes in a unix timestamp and outputs a string that represents how long ago that unix timestamp was in the past from the current time, in the correct second/minute/hour/day/week/year format 
   const getTimeCreatedAt = function(time) {
     const currentDate = Date.now();
     const timePassedSeconds = (currentDate - time) / 1000
@@ -25,6 +26,7 @@ $(document).ready(function() {
     }
   }
 
+  //Generates the Jquery object representing the tweet which can then be used to render tweets to the page
   const createTweetElement = function(tweet) {
     const html = 
       `   <article class="tweet">
@@ -51,16 +53,19 @@ $(document).ready(function() {
     return $tweet;
   }
 
+  //Loops over the submitted tweets, passes them to the function that creates the injectable html and renders what is returned on the page
   const renderTweets = function(tweets) {
     tweets.forEach(tweet => $('#tweets-container').prepend(createTweetElement(tweet)));
   }
 
+  //Takes in raw user input and outputs text that is safe from xss attacks
   const escape =  function(str) {
     let div = document.createElement('div');
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
   }
 
+  //handles post submission for new tweet, including errors if the user inputs invalid things
   $(function() {
     $('.new-tweet').on('submit', function() {
       event.preventDefault();
@@ -86,10 +91,12 @@ $(document).ready(function() {
     });
   });
 
-  //  initializes the hiding of the error message
+
+  //  hides error messages on page load
    $(".error-no-input").hide();
    $(".error-max-chars").hide();
 
+  //Handles the GET request for loading tweets to the page
   const loadTweets = function() {
     $.ajax('/tweets', {
       method: 'GET',
