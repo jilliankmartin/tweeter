@@ -90,11 +90,47 @@ $(document).ready(function() {
       }
     });
   });
+  //changes write new tweet button if its hovered on
+  $(function() {
+    $('#new-tweet-nav').on('mouseover', function() {
+      $( "#header-sticky button" ).addClass('tweeter-hovered');
+    });
+    $('#new-tweet-nav').on('mouseleave', function() {
+      event.target.style.color = "none";
+      $( "#header-sticky button" ).removeClass('tweeter-hovered');
+    });
 
+  });
+
+  //drops the new tweet input down if a user clicks the button in nav
+  $(function() {
+    // $('#new-tweet-nav').on('click', function() {
+    //   let tweetOpened = false;
+    //   if (tweetOpened) {
+    //     $('.new-tweet').slideUp();
+    //     tweetOpened = false;
+    //   } else {
+    //     $('.new-tweet').slideDown("slow");
+    //     tweetOpened = true;
+    //   }
+    // });
+    $('#new-tweet-nav').on('click', function() {
+      if ($('.new-tweet').hasClass('tweeter-opened')) {
+        $('.new-tweet').removeClass('tweeter-opened');
+        $('.new-tweet').slideUp();
+      } else {
+        $('.new-tweet').addClass('tweeter-opened');
+        $('.new-tweet').slideDown("slow");
+      }
+    });
+  });
 
   //  hides error messages on page load
    $(".error-no-input").hide();
    $(".error-max-chars").hide();
+
+  //hides the tweet container on page load (until a user drops it down using the button)
+  $(".new-tweet").hide();
 
   //Handles the GET request for loading tweets to the page
   const loadTweets = function() {

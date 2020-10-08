@@ -24,8 +24,8 @@
   border-bottom: 5px solid #545149;
 }
 
-.chevron {
-  font-family: 'Source Sans Pro', sans-serif;
+#new-tweet-nav:hover {
+  cursor: default;
 }
 
 .color-red {
@@ -52,4 +52,12 @@
   padding-left: 10px;
   padding-right: 10px;
   margin: 10px;
+}
+
+.tweeter-hovered{
+  color: orange;
+}
+
+.tweeter-opened {
+
 }

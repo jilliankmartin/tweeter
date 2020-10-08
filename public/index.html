@@ -31,7 +31,7 @@
       <span class="logo">tweeter</span>
       <div id="new-tweet-nav">
       <button type="button" name="newTweet"><b>Write</b> a new tweet</button>
-      <span>&nbsp &#8964</span>
+      <span id="toggle">&nbsp &#8964</span>
     </div>
     </nav>
     <!-- Hard coded header with user info (fixed) -->
@@ -51,11 +51,10 @@
         <form action="/tweets" method="POST">
           <label for="tweet-text">What are you humming about?</label>
         </br>
-        <div class="error-no-input">Error no input!</div>
-        <div class="error-max-chars">Error max chars!</div>
+        <div class="error-no-input">It doesn't look like you wrote a tweet! Please enter some text.</div>
+        <div class="error-max-chars">Your tweet is over 140 characters. Shorten it to submit.</div>
           <textarea name="text" id="tweet-text"></textarea>
           <footer class="tweet-footer">
-            
             <button type="submit">Tweet</button>
             <output name="counter" class="counter" for="tweet-text">140</output>
           </footer>
