@@ -121,6 +121,7 @@ $(document).ready(function() {
       } else {
         $('.new-tweet').addClass('tweeter-opened');
         $('.new-tweet').slideDown("slow");
+        $('#tweet-text').focus();
       }
     });
   });
