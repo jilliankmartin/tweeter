@@ -90,6 +90,7 @@ $(document).ready(function() {
       }
     });
   });
+  
   //changes write new tweet button if its hovered on
   $(function() {
     $('#new-tweet-nav').on('mouseover', function() {
