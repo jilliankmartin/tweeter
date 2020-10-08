@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
   
   //controls the movement of the tweet character counter as a user types
@@ -6,8 +7,11 @@ $(document).ready(function() {
     const charCounter = $('.counter').text(`${remainingChars}`);
     if (remainingChars < 0) {
       charCounter.addClass('color-red');
-    } else
+    } else {
       charCounter.removeClass('color-red');
+    }
   });
+
+  
 
 });

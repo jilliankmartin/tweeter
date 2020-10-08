@@ -1,15 +1,15 @@
 
 $(document).ready(function() {
 
-    //Takes in a unix timestamp and outputs a string that represents how long ago that unix timestamp was in the past from the current time, in the correct second/minute/hour/day/week/year format 
+  //Takes in a unix timestamp and outputs a string that represents how long ago that unix timestamp was in the past from the current time, in the correct second/minute/hour/day/week/year format
   const getTimeCreatedAt = function(time) {
     const currentDate = Date.now();
-    const timePassedSeconds = (currentDate - time) / 1000
-    const timePassedMinutes = (currentDate - time) / 1000 / 60
-    const timePassedHours = (currentDate - time) / 1000 / 60 / 60
-    const timePassedDays = (currentDate - time) / 1000 / 60 / 60 / 24
-    const timePassedWeeks = (currentDate - time) / 1000 / 60 / 60 / 24 / 7
-    const timePassedYears = (currentDate - time) / 1000 / 60 / 60 / 24 / 7 / 52
+    const timePassedSeconds = (currentDate - time) / 1000;
+    const timePassedMinutes = (currentDate - time) / 1000 / 60;
+    const timePassedHours = (currentDate - time) / 1000 / 60 / 60;
+    const timePassedDays = (currentDate - time) / 1000 / 60 / 60 / 24;
+    const timePassedWeeks = (currentDate - time) / 1000 / 60 / 60 / 24 / 7;
+    const timePassedYears = (currentDate - time) / 1000 / 60 / 60 / 24 / 7 / 52;
 
     if (timePassedSeconds < 60) {
       return `${Math.floor(timePassedSeconds)} seconds ago`;
@@ -24,11 +24,11 @@ $(document).ready(function() {
     } else if (timePassedYears > 1) {
       return `${Math.floor(timePassedYears)} years ago`;
     }
-  }
+  };
 
   //Generates the Jquery object representing the tweet which can then be used to render tweets to the page
   const createTweetElement = function(tweet) {
-    const html = 
+    const html =
       `   <article class="tweet">
               <header>
                 <div>
@@ -46,24 +46,24 @@ $(document).ready(function() {
                 <div>&#9873 &#8634 &#9829</div>
               </footer>
           </article>
-      `
+      `;
     
     let $tweet = $(`${html}`);
     
     return $tweet;
-  }
+  };
 
   //Loops over the submitted tweets, passes them to the function that creates the injectable html and renders what is returned on the page
   const renderTweets = function(tweets) {
     tweets.forEach(tweet => $('#tweets-container').prepend(createTweetElement(tweet)));
-  }
+  };
 
   //Takes in raw user input and outputs text that is safe from xss attacks
   const escape =  function(str) {
     let div = document.createElement('div');
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
-  }
+  };
 
   //handles post submission for new tweet, including errors if the user inputs invalid things
   $(function() {
@@ -71,65 +71,54 @@ $(document).ready(function() {
       event.preventDefault();
       const rawTweetInput = $('#tweet-text').val();
       const tweetContent = $('#tweet-text').serialize();
-      const errorEmpty = "It doesn't look like you wrote a tweet! Please enter some text."
-      const errorOverChar = "Your tweet is over 140 characters. Shorten it to submit."
       if (!rawTweetInput || rawTweetInput === " ") {
         $('.error-no-input').slideDown("slow");
       } else if (rawTweetInput.length > 140) {
         $('.error-max-chars').slideDown("slow");
       } else {
-        $('.new-tweet div').slideUp();
-        $.ajax('/tweets', { 
-          url: '/tweets',
+        $.ajax('/tweets', {
           method: 'POST',
           data: tweetContent,
         })
-        .then(function() {
-          loadTweets();
-        });
+          .then(function() {
+            $('textarea').val("");
+            $('.counter').text("140");
+            $('.new-tweet div').slideUp();
+            loadTweets();
+          });
       }
     });
   });
-  
+
   //changes write new tweet button if its hovered on
   $(function() {
     $('#new-tweet-nav').on('mouseover', function() {
-      $( "#header-sticky button" ).addClass('tweeter-hovered');
+      $("#header-sticky button").addClass('tweeter-hovered');
     });
     $('#new-tweet-nav').on('mouseleave', function() {
       event.target.style.color = "none";
-      $( "#header-sticky button" ).removeClass('tweeter-hovered');
+      $("#header-sticky button").removeClass('tweeter-hovered');
     });
 
   });
 
   //drops the new tweet input down if a user clicks the button in nav
   $(function() {
-    // $('#new-tweet-nav').on('click', function() {
-    //   let tweetOpened = false;
-    //   if (tweetOpened) {
-    //     $('.new-tweet').slideUp();
-    //     tweetOpened = false;
-    //   } else {
-    //     $('.new-tweet').slideDown("slow");
-    //     tweetOpened = true;
-    //   }
-    // });
+    let tweetOpened = false;
     $('#new-tweet-nav').on('click', function() {
-      if ($('.new-tweet').hasClass('tweeter-opened')) {
-        $('.new-tweet').removeClass('tweeter-opened');
+      if (tweetOpened) {
         $('.new-tweet').slideUp();
+        tweetOpened = false;
       } else {
-        $('.new-tweet').addClass('tweeter-opened');
         $('.new-tweet').slideDown("slow");
-        $('#tweet-text').focus();
+        tweetOpened = true;
       }
     });
   });
 
   //  hides error messages on page load
-   $(".error-no-input").hide();
-   $(".error-max-chars").hide();
+  $(".error-no-input").hide();
+  $(".error-max-chars").hide();
 
   //hides the tweet container on page load (until a user drops it down using the button)
   $(".new-tweet").hide();
@@ -139,9 +128,9 @@ $(document).ready(function() {
     $.ajax('/tweets', {
       method: 'GET',
     })
-    .then(function(tweets) {
-      renderTweets(tweets)
-    });
+      .then(function(tweets) {
+        renderTweets(tweets);
+      });
   };
 
   loadTweets();
