@@ -109,7 +109,6 @@ $(document).ready(function() {
       $headerSticky.addClass('tweeter-hovered');
     });
     $newTweet.on('mouseleave', function() {
-      event.target.style.color = "none";
       $headerSticky.removeClass('tweeter-hovered');
     });
   });
@@ -137,7 +136,7 @@ $(document).ready(function() {
   //hides the tweet container on page load (until a user drops it down using the button)
   $(".new-tweet").hide();
 
-  //Handles the GET request for loading tweets to the page
+
   const loadTweets = function() {
     $.ajax('/tweets', {
       method: 'GET',
@@ -146,5 +145,7 @@ $(document).ready(function() {
         renderTweets(tweets);
       });
   };
+
+  //initial call on load to load existing tweets
   loadTweets();
 });
