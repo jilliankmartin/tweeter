@@ -2,6 +2,7 @@
 $(document).ready(function() {
 
   //Takes in a unix timestamp and outputs a string that represents how long ago that unix timestamp was in the past from the current time, in the correct second/minute/hour/day/week/year format
+  // Minor bug means the code doesn't handle singular time units, e.g. "1 Day Ago" will return as "1 Days ago"
   const getTimeCreatedAt = function(time) {
     const currentDate = Date.now();
     const timePassedSeconds = (currentDate - time) / 1000;
@@ -55,6 +56,7 @@ $(document).ready(function() {
 
   //Loops over the submitted tweets, passes them to the function that creates the injectable html and renders what is returned on the page
   const renderTweets = function(tweets) {
+    $('#tweets-container').empty();
     tweets.forEach(tweet => $('#tweets-container').prepend(createTweetElement(tweet)));
   };
 
@@ -99,7 +101,6 @@ $(document).ready(function() {
       event.target.style.color = "none";
       $("#header-sticky button").removeClass('tweeter-hovered');
     });
-
   });
 
   //drops the new tweet input down if a user clicks the button in nav
@@ -132,7 +133,5 @@ $(document).ready(function() {
         renderTweets(tweets);
       });
   };
-
   loadTweets();
-
 });
