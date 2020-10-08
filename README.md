@@ -8,6 +8,7 @@ Users can post tweets (under 140 characters only of course) and follow the feed 
 
 !["Browsing the tweets"]()
 !["Write a new tweet"]()
+!["Write a new tweet - over character limit"]()
 
 ## Getting Started
 
